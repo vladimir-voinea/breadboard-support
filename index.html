@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breadboard — Support</title>
+<style>
+  :root {
+    --bg: #f6f1e7; --ink: #2b2317; --accent: #8a6d3b; --card: #fffdf8; --line: #e2d8c3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1c1712; --ink: #ece4d4; --accent: #c9a961; --card: #262019; --line: #3a3226; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Georgia, serif;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 48px 24px 80px; }
+  h1 { font-size: 2rem; margin: 0 0 4px; }
+  h2 { font-size: 1.15rem; margin: 36px 0 8px; color: var(--accent); }
+  .tagline { color: var(--accent); margin: 0 0 32px; font-style: italic; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px 24px; margin: 16px 0; }
+  a { color: var(--accent); }
+  footer { margin-top: 56px; font-size: 0.85rem; opacity: 0.7; }
+  ul { padding-left: 20px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Breadboard: Circuit Puzzles</h1>
+  <p class="tagline">Real circuits, real physics — every puzzle runs on a genuine circuit simulator.</p>
+
+  <h2>Contact &amp; support</h2>
+  <div class="card">
+    <p>Questions, bug reports, or feedback? Email us and we'll get back to you:</p>
+    <p><strong><a href="mailto:voineavladimir@gmail.com">voineavladimir@gmail.com</a></strong></p>
+    <p>Please include your device model and iOS version for bug reports — it helps a lot.</p>
+  </div>
+
+  <h2>Frequently asked</h2>
+  <div class="card">
+    <p><strong>My LED burned out — is that a bug?</strong><br>
+    No — that's the game. Every circuit is really simulated: too much current
+    really does destroy parts, exactly like on a physical bench. Tap Reset and
+    add a current-limiting resistor. The in-game Handbook (brass book button)
+    has every component's ratings and the formulas to pick the right values.</p>
+    <p><strong>I'm stuck on a level.</strong><br>
+    Tap the wand ("Solve it for me") — the tutor builds the solution one part
+    at a time and explains each step with real numbers.</p>
+    <p><strong>Does the game need an internet connection?</strong><br>
+    No. The whole game works offline, including in airplane mode.</p>
+    <p><strong>Is my progress synced or uploaded anywhere?</strong><br>
+    No. Progress is stored only on your device. See the
+    <a href="privacy.html">privacy policy</a>.</p>
+  </div>
+
+  <footer>
+    <p>© 2026 Constantin-Vladimir Voinea · <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+</main>
+</body>
+</html>
