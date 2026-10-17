@@ -21,41 +21,123 @@
   h2 { font-size: 1.1rem; margin: 32px 0 8px; color: var(--accent); }
   .date { opacity: 0.7; font-size: 0.9rem; margin-bottom: 28px; }
   a { color: var(--accent); }
+  code {
+    font: 0.85em ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--card); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px;
+  }
+  ul { padding-left: 20px; }
+  li { margin: 4px 0; }
   footer { margin-top: 56px; font-size: 0.85rem; opacity: 0.7; }
 </style>
 </head>
 <body>
 <main>
   <h1>Privacy Policy — Breadboard: Circuit Puzzles</h1>
-  <p class="date">Effective date: July 23, 2026</p>
+  <p class="date">Effective date: October 17, 2026</p>
 
   <h2>The short version</h2>
-  <p><strong>Breadboard collects no data. None.</strong> There are no accounts,
-  no analytics, no advertising, no tracking, and no third-party SDKs that
-  collect information. The game runs entirely on your device and works fully
-  offline.</p>
+  <p>Breadboard is fully playable offline — no account, no connection ever
+  required. While you play, the app can send <strong>anonymous usage
+  analytics</strong> to our own first-party server so we can tune level
+  difficulty and see which features are used. It contains no name, no email,
+  no precise location and no content you create. It is on by default and you
+  can turn it off with one switch in
+  <strong>Settings → “Share anonymous usage data.”</strong> When the switch is
+  off, no usage data is gathered or sent at all. There are no ads and no
+  third-party analytics or advertising SDKs in the app.</p>
 
-  <h2>Data we collect</h2>
-  <p>We do not collect, store, transmit, sell, or share any personal data or
-  usage data. The app makes no network requests.</p>
+  <h2>What we collect</h2>
+  <p><strong>Anonymous device identifier.</strong> The app computes
+  <code>SHA-256(salt + identifierForVendor)</code> <em>on your device</em>:
+  Apple's vendor identifier (IDFV) mixed with an app-specific salt, then
+  irreversibly hashed. The raw IDFV never leaves your device and the hash is
+  used only to count unique players and sessions. We never use the advertising
+  identifier (IDFA) and the app never shows an ATT (tracking) prompt.</p>
+  <p><strong>Device info.</strong> <code>app_version</code>,
+  <code>os_version</code>, <code>model</code> — so we know which iOS versions
+  and devices to support.</p>
+  <p><strong>Usage events.</strong> Ten game-level events, each a name plus
+  small numeric/ID properties:</p>
+  <ul>
+    <li><code>install</code> — first launch ever on a device (no properties)</li>
+    <li><code>app_open</code> — <code>session_id</code></li>
+    <li><code>app_close</code> — <code>session_id</code>, <code>duration_s</code></li>
+    <li><code>level_start</code> — <code>level_id</code>, <code>chapter</code></li>
+    <li><code>level_solve</code> — <code>level_id</code>, <code>chapter</code>,
+      <code>attempts</code>, <code>placements</code>, <code>removals</code>,
+      <code>burnouts</code>, <code>duration_s</code></li>
+    <li><code>level_abandon</code> — <code>level_id</code>, <code>chapter</code>,
+      <code>placements</code>, <code>removals</code>, <code>burnouts</code>,
+      <code>duration_s</code></li>
+    <li><code>burnout</code> — <code>level_id</code>, <code>component</code></li>
+    <li><code>tutor_used</code> — <code>level_id</code>, <code>mode</code>
+      (step or skip), <code>steps_placed</code></li>
+    <li><code>handbook_open</code> — <code>page_id</code></li>
+    <li><code>level_replay</code> — <code>level_id</code></li>
+  </ul>
+  <p>On the App Store privacy label these appear as <em>Usage — Product
+  Interaction</em> (the events) and <em>Diagnostics</em> (the device info),
+  collected for analytics purposes, <strong>not used to track you</strong> and
+  <strong>not linked to you</strong>.</p>
 
-  <h2>Data stored on your device</h2>
-  <p>Your puzzle progress (which levels you've completed) is saved locally on
-  your device using Apple's standard app storage. It never leaves your device,
-  and deleting the app deletes it.</p>
+  <h2>What we never collect</h2>
+  <ul>
+    <li>Your IP address — used only transiently for abuse rate-limiting at the
+      network edge and immediately discarded; never stored</li>
+    <li>Precise location</li>
+    <li>Your name, email address, or any contact info</li>
+    <li>Any free text you type, screenshots, or the content you build</li>
+    <li>The advertising identifier (IDFA) — no ATT prompt is ever shown</li>
+    <li>Per-tap micro-events — we count what happens, not every finger movement</li>
+    <li>No ad or advertising-network data — the app contains no ad SDK</li>
+  </ul>
+
+  <h2>How the data travels</h2>
+  <p>While you're online, events are sent within about a second over HTTPS to
+  <strong>our own</strong> analytics collector — not to Google, not to any ad
+  network, no third-party processors. The queue on your device's disk is only
+  an offline bridge: it is written when the network is down or a send fails,
+  drained the moment connectivity returns, purged on server confirmation, and
+  anything still unsent after 72 hours is dropped. The healthy online path
+  never writes analytics data to disk. Playing in airplane mode is fully
+  supported — nothing is collected beyond what a normal, ordinary HTTPS
+  request would involve while online.</p>
+
+  <h2>Your control</h2>
+  <p><strong>Settings → “Share anonymous usage data”</strong> (on by default).
+  Turning it off stops all usage-data collection immediately: nothing is
+  queued, the existing queue is purged, and zero analytics traffic leaves
+  the device. The game is 100% functional offline and stays fully functional
+  with the
+  switch off.</p>
+
+  <h2>Retention</h2>
+  <p>Raw event rows (with the anonymous device hash) are deleted after
+  <strong>365 days</strong>. Only fully anonymized aggregates — counts and
+  averages with no device identifier of any kind — are kept longer, so we can
+  compare level difficulty and retention over time.</p>
+
+  <h2>Deletion</h2>
+  <p>Want everything tied to your device erased? Email us and we'll walk you
+  through a short support flow that reads your device's anonymous hash from
+  the app; we then delete every raw row carrying that hash on request. Because
+  the data is anonymous and unlinked to your identity, we can only erase rows
+  matching that hash.</p>
 
   <h2>Children's privacy</h2>
-  <p>Breadboard is suitable for all ages. Because we collect no data at all,
-  no data is collected from children.</p>
+  <p>Breadboard is suitable for all ages (rated 4+). There are no accounts and
+  no user-generated content, and the usage data described above is anonymous,
+  first-party and never used for advertising or tracking.</p>
 
   <h2>Future changes</h2>
   <p>If a future update ever changes what the app does with data — for
-  example, an optional advertising feature — this policy will be updated
-  first, with the effective date above, and the App Store privacy label will
-  be updated to match.</p>
+  example, if the dormant rewarded-ad gate (planned as an optional “solve it
+  for me” unlock) is switched on — this policy will be updated first, with the
+  effective date above, and the App Store privacy label will be updated to
+  match, before that version ships.</p>
 
   <h2>Contact</h2>
-  <p>Questions about this policy:
+  <p>Questions, or a deletion request:
   <a href="mailto:parallax.tech.ro@gmail.com">parallax.tech.ro@gmail.com</a></p>
 
   <footer>
